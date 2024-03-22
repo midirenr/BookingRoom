@@ -2,6 +2,8 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED
 from rest_framework.status import HTTP_200_OK
+from rest_framework.status import HTTP_409_CONFLICT
+
 from rest_framework import permissions
 
 from .models import Booking
@@ -55,7 +57,14 @@ class BookingCreate(viewsets.ViewSet):
         Создание бронирования
         """
         serializer = BookingCreateSerializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
+        serializer.is_valid(raise_exception=True)
+
+        is_busy = Booking.check_room_occupied_at_time(request.data["room"],
+                                                      request.data["date_time_start"],
+                                                      request.data["date_time_end"])
+        if is_busy:
+            return Response({'detail': 'Данное время уже забронировано для этой комнаты'}, status=HTTP_409_CONFLICT)
+        else:
             booking = Booking.create_booking_for_room(request.data["room"],
                                                       request.data["date_time_start"],
                                                       request.data["date_time_end"],

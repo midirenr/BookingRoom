@@ -2,7 +2,6 @@ from datetime import datetime
 from datetime import date
 from datetime import timedelta
 
-
 from django.db import models
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
@@ -110,3 +109,10 @@ class Booking(models.Model):
         new_booking.save()
 
         return new_booking
+
+    @classmethod
+    def check_room_occupied_at_time(cls, room: str, date_time_start: str, date_time_end: str):
+        start = datetime.strptime(date_time_start, "%Y-%m-%dT%H:%M:%S")
+        end = datetime.strptime(date_time_end, "%Y-%m-%dT%H:%M:%S")
+        return cls.objects.select_related("room").filter(date_time_start__range=[start, end],
+                                                         room__number=room).exists()

@@ -6,7 +6,7 @@ from RoomBooking.models import Booking
 from Booking.settings import BASE_DIR
 
 
-def create_report(room_number=None, date_time_start=None, date_time_end=None):
+def create_report(room_number=None, date_time_start=None, date_time_end=None) -> None:
     """
     Создать отчет
 
