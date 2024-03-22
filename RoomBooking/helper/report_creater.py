@@ -3,6 +3,7 @@ from datetime import datetime
 from docx import Document
 
 from RoomBooking.models import Booking
+from Booking.settings import BASE_DIR
 
 
 def create_report(room_number=None, date_time_start=None, date_time_end=None):
@@ -39,7 +40,5 @@ def create_report(room_number=None, date_time_start=None, date_time_end=None):
             document.add_paragraph("Цель бронирования: " + schedule.purpose)
             document.add_paragraph()
 
-    report_save_path = "RoomBooking/storage/booking_report/report.docx"
+    report_save_path = f"{BASE_DIR}/RoomBooking/storage/booking_report/report.docx"
     document.save(report_save_path)
-
-    return report_save_path

@@ -1,4 +1,3 @@
-from django.http import FileResponse
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED
@@ -42,6 +41,7 @@ class BookingView(viewsets.ViewSet):
 
 class BookingCreate(viewsets.ViewSet):
     permission_classes = [permissions.IsAuthenticated]
+
     def create_booking_view(self, request):
         """
         Утилитно добавил для нормального вывода в DRF UI
@@ -85,6 +85,6 @@ class BookingReport(viewsets.ViewSet):
             room = request.data["room"] if "room" in request.data else None
             date_time_start = request.data["date_time_start"] if "date_time_start" in request.data else None
             date_time_end = request.data["date_time_end"] if "date_time_end" in request.data else None
-            report = create_report(room, date_time_start, date_time_end)
+            create_report(room, date_time_start, date_time_end)
 
-            return FileResponse(open(report, 'rb'), as_attachment=True)
+        return Response({'file_to_download': '127.0.0.1:8000/media/booking_report/report.docx'}, status=HTTP_200_OK)
