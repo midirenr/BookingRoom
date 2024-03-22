@@ -64,7 +64,7 @@ POST: /api/v1/booking/create/
 GET: /api/v1/booking/get_report/
 ```
 
-- Получить отчет в формате docx(word, libreoffice и т.д). В ответ получите FileResponse, нужно разрешить скачивание:
+- Получить отчет в формате docx(word, libreoffice и т.д). В ответ получите путь к файлу для скачивания отчета:
 ```
 POST: /api/v1/booking/get_report/
 
