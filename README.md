@@ -83,7 +83,16 @@ POST: /api/v1/booking/get_report/
 ```
 python manage.py test RoomBooking
 ```
+
+## Доп. информация:
   
+Оставил в репозитории базу данных SQLite чтобы не пришлось создавать пользователя, комнаты и бронирования.
+
+- Данные от пользователя:
+  - login: admin
+  - password: admin
+
+
 ## Используемые библиотеки и фреймворки:
 - [Django Framework](https://www.djangoproject.com/)
 - [Django REST Framework](https://www.django-rest-framework.org)
