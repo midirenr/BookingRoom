@@ -9,6 +9,11 @@ from django.shortcuts import get_object_or_404
 
 
 class Room(models.Model):
+    """
+    Модель <Комната>
+
+    number: номер комнаты
+    """
     number = models.CharField(max_length=10, unique=True, verbose_name="Номер комнаты")
 
     def __str__(self):
@@ -29,6 +34,15 @@ class Room(models.Model):
 
 
 class Booking(models.Model):
+    """
+    Модель <Бронирование>
+
+    room: внешний ключ к модели <Комната>
+    user: внешний ключ к модели <Пользователь>
+    date_time_start: время начала бронирования
+    date_time_end: время конца бронирования
+    purpose: цель бронирования
+    """
     room = models.ForeignKey(Room, on_delete=models.CASCADE, verbose_name="Комната")
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Пользователь")
     date_time_start = models.DateTimeField(verbose_name="Начало")
@@ -52,8 +66,8 @@ class Booking(models.Model):
         Получить расписание бронирования для комнаты
 
         :params room - номер комнаты
-        :params date_time_start - опиционально, начало временного промежутка за которое нужно получить расписание
-        :params date_time_end - опиционально, конец временного промежутка за которое нужно получить расписание
+        :params date_time_start - опционально, начало временного промежутка за которое нужно получить расписание
+        :params date_time_end - опционально, конец временного промежутка за которое нужно получить расписание
         """
 
         if date_time_start and date_time_end:
