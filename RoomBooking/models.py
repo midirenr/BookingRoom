@@ -57,7 +57,7 @@ class Booking(models.Model):
         """
         Получить все расписание
         """
-        return cls.objects.select_related("room").select_related("user")
+        return cls.objects.select_related("room").select_related("user").order_by("room_id")
 
     @classmethod
     def get_booking_schedule_for_room(cls, room: str, date_time_start=None, date_time_end=None):
