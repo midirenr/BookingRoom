@@ -109,5 +109,5 @@ python manage.py test RoomBooking
 ## Используемые библиотеки и фреймворки:
 - [Django Framework](https://www.djangoproject.com/)
 - [Django REST Framework](https://www.django-rest-framework.org)
-- [Django REST Framework](https://pypi.org/project/python-docx/)
+- [Python DOCX](https://pypi.org/project/python-docx/)
 
