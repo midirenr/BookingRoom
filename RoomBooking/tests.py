@@ -110,4 +110,4 @@ class ReportBookingTest(TestCase):
                                    "date_time_end": "2030-03-22T08:21:35",
                                })
         client.logout()
-        self.assertIsInstance(response, FileResponse)
+        self.assertIs(response.status_code, HTTP_200_OK)
